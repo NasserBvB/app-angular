@@ -1,0 +1,35 @@
+<div *ngIf="contacts.length > 0;then listContacts else noContacts"> </div>
+
+<ng-template #listContacts>
+    <h1>Liste des contactes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Tel</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let contact of contacts">
+                <th scope="row">{{contact.id}}</th>
+                <td>{{contact.name}}</td>
+                <td>{{contact.tel}}</td>
+                <td>{{contact.email}}</td>
+                <td>
+                    <button class="btn btn-success">Edite</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-template>
+
+<ng-template #noContacts>
+    pas de contactes
+</ng-template>
