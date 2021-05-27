@@ -1,15 +1,16 @@
-import { PostsService } from './services/posts.service';
-import { ContactsService } from './services/contacts.service';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ContactComponent } from './contact/contact.component';
-import { PostComponent } from './post/post.component';
-import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PostComponent } from './post/post.component';
+import { ContactsService } from './services/contacts.service';
+import { PostsService } from './services/posts.service';
+
 
 const routes:Routes =[
   {
@@ -41,7 +42,8 @@ const routes:Routes =[
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule
   ],
   providers: [ContactsService, PostsService],
   bootstrap: [AppComponent]

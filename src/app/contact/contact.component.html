@@ -1,35 +1,72 @@
-<div *ngIf="contacts.length > 0;then listContacts else noContacts"> </div>
+<div *ngIf="contacts.length > 0; then listContacts; else noContacts"></div>
 
 <ng-template #listContacts>
-    <h1>Liste des contactes</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Tel</th>
-                <th scope="col">Email</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let contact of contacts">
-                <th scope="row">{{contact.id}}</th>
-                <td>{{contact.name}}</td>
-                <td>{{contact.tel}}</td>
-                <td>{{contact.email}}</td>
-                <td>
-                    <button class="btn btn-success">Edite</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <h1>Liste des contactes</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Tel</th>
+        <th scope="col">Email</th>
+        <th scope="col"></th>
+        <th scope="col">
+          <button class="btn btn-primary" (click)="toggleAdd(true)">Add</button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts">
+        <th scope="row">{{ contact.id }}</th>
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.tel }}</td>
+        <td>{{ contact.email }}</td>
+        <td>
+          <button class="btn btn-success" (click)="toggleEdit(contact)">
+            Edite
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="delete(contact.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </ng-template>
 
-<ng-template #noContacts>
-    pas de contactes
-</ng-template>
+<ng-template #noContacts> pas de contactes </ng-template>
+
+<div *ngIf="creating || editing" class="container">
+  <form [formGroup]="formGroup">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="tel" class="form-label">Telephone</label>
+      <input type="text" class="form-control" id="tel" formControlName="tel" />
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="submit()">
+      Submit
+    </button>
+    <button type="submit" class="btn btn-primary" (click)="toggleAdd(false)">
+      Cancel
+    </button>
+  </form>
+</div>
