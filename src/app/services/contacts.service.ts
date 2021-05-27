@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IContact } from '../models/contact.model';
+const APi = 'http://localhost:3000';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactsService {
   constructor(private http: HttpClient) {}
-
   getContacts() {
     // return this.http.get<IContact[]>('/contacts');
     return [
@@ -19,18 +19,18 @@ export class ContactsService {
   }
 
   getOneContact(contactId: number) {
-    return this.http.get<IContact>(`/contacts${contactId}`);
+    return this.http.get<IContact>(`${APi}/contacts${contactId}`);
   }
 
   createContact(contact: IContact) {
-    return this.http.post<IContact>('/contacts', contact);
+    return this.http.post<IContact>(`${APi}/contacts`, contact);
   }
 
   updateContact(contact: IContact) {
-    return this.http.put<IContact>('/contacts', contact);
+    return this.http.put<IContact>(`${APi}/contacts`, contact);
   }
 
   deleteContact(contactId: number) {
-    return this.http.delete(`/contacts/${contactId}`);
+    return this.http.delete(`${APi}/contacts/${contactId}`);
   }
 }
