@@ -16,6 +16,7 @@ export class ContactComponent implements OnInit {
     name: new FormControl(),
     tel: new FormControl(),
     email: new FormControl(),
+    id: new FormControl(),
   });
 
   contacts: any = [];
@@ -45,14 +46,15 @@ export class ContactComponent implements OnInit {
       name: contact.name,
       email: contact.email,
       tel: contact.tel,
+      id: contact.id
     });
   }
 
   // get all contacts
   getAll() {
-    // this.contactsService.getContacts().subscribe((data: IContact[]) => {
-    this.contacts = this.contactsService.getContacts();
-    // });
+     this.contactsService.getContacts().subscribe((data: IContact[]) => {
+    this.contacts = data;
+     });
   }
 
   // create contact
@@ -65,6 +67,7 @@ export class ContactComponent implements OnInit {
         alert(error.message);
       }
     );
+    this.getAll();
   }
 
   // update contact
@@ -77,6 +80,7 @@ export class ContactComponent implements OnInit {
         alert(error.message);
       }
     );
+    this.getAll();
   }
 
   // Submit form
@@ -97,5 +101,6 @@ export class ContactComponent implements OnInit {
         alert(error.message);
       }
     );
+    this.getAll();
   }
 }
